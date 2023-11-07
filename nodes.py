@@ -17,7 +17,7 @@ def np2tensor(img_np: np.ndarray | list[np.ndarray]) -> torch.Tensor:
 pwd = os.getcwd()
 
 #where the magic happens, sorta
-class Consistency:
+class itsConsistency:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -62,9 +62,9 @@ class Consistency:
 
 
 NODE_CLASS_MAPPINGS = {
-	"Comfy_ConsistencyVAE": Consistency,
+	"Comfy_itsConsistencyVAE": itsConsistency,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-	"Comfy_ConsistencyVAE": "Consistency VAE Decoder",
+	"Comfy_itsConsistencyVAE": "its Consistency VAE Decoder",
 }
