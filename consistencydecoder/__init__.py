@@ -122,12 +122,15 @@ class ConsistencyDecoder:
 		]
 		return torch.stack(channels, dim=1)
 
-	@torch.no_grad()
-	def __call__(
-		self,
-		features: torch.Tensor,
-		schedule=[1.0, 0.5],
-	):
+
+
+	@torch.no_grad()  # This decorator should be outdented to match the method definition.
+	def __call__(self, features: torch.Tensor, schedule=[1.0, 0.5]):
+		# Set the seed for reproducibility
+		torch.manual_seed(0)
+		if "cuda" in self.device:
+			torch.cuda.manual_seed_all(0)
+
 		features = self.ldm_transform_latent(features)
 		ts = self.round_timesteps(
 			torch.arange(0, 1024),
@@ -165,6 +168,8 @@ class ConsistencyDecoder:
 			).clamp(-1, 1)
 			x_start = pred_xstart
 		return x_start
+
+
 
 
 def save_image(image, name):
